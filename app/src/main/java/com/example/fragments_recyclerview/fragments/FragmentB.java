@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.fragments_recyclerview.R;
+import com.example.fragments_recyclerview.model.Member;
 
 public class FragmentB extends Fragment {
 
@@ -25,10 +26,13 @@ public class FragmentB extends Fragment {
         contact_phone = view.findViewById(R.id.contact_phone_number);
         return view;
     }
-    public void updateText(String message1, String message2){
 
-        contact_name.setText(message1);
-        contact_phone.setText(message2);
+
+
+    public void updateText(Member member){
+
+        contact_name.setText(member.getName());
+        contact_phone.setText(member.getPhoneNumber());
     }
 }
 

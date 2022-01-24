@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fragments_recyclerview.MainActivity;
 import com.example.fragments_recyclerview.R;
+import com.example.fragments_recyclerview.fragments.FragmentA;
 import com.example.fragments_recyclerview.model.Member;
 
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private FragmentAListener listener;
-    MainActivity activity;
+
+    FragmentA fragmentA;
     List<Member> members;
 
-    public CustomAdapter(MainActivity activity, List<Member> members) {
-        this.activity = activity;
+    public CustomAdapter(FragmentA fragmentA, List<Member> members) {
+        this.fragmentA = fragmentA;
         this.members = members;
     }
 
@@ -47,8 +48,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             lay_click.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    
-//                    listener.sendToFragmentB(member.getName(),member.getPhoneNumber());
+                    fragmentA.clickContactItem(member);
                 }
             });
             }
@@ -72,7 +72,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
     }
-    public interface FragmentAListener{
-        void sendToFragmentB(String text1,String text2);
-    }
+
+
+
 }

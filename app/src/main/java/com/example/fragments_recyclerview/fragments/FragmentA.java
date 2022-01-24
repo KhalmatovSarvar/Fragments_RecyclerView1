@@ -1,5 +1,6 @@
 package com.example.fragments_recyclerview.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class FragmentA extends Fragment {
     private RecyclerView recyclerView;
+    FragmentAListener listener;
 
     @Nullable
     @Override
@@ -32,7 +34,7 @@ public class FragmentA extends Fragment {
 
         List<Member> members = prepareMemberList();
 
-        CustomAdapter adapter = new CustomAdapter((MainActivity) view.getContext(),members);
+        CustomAdapter adapter = new CustomAdapter(this,members);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -41,9 +43,36 @@ public class FragmentA extends Fragment {
     private List<Member> prepareMemberList() {
         List<Member> members= new ArrayList<>();
         for(int i = 0; i<20; i++){
-            members.add(new Member("Sarvarbek"+i,"Khalmatov"+i));
+            members.add(new Member("A"+i,"9375957"+i));
         }
         return members;
     }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof  FragmentAListener){
+            listener = (FragmentAListener) context;
+        }
     }
+
+
+    public void clickContactItem(Member member){
+        listener.sendToFragmentB(member);
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    public interface FragmentAListener{
+        void sendToFragmentB(Member member);
+    }
+
+
+}
 
